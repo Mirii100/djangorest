@@ -1,5 +1,5 @@
 
-
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,7 +46,7 @@ ROOT_URLCONF = 'apiProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,7 +82,18 @@ DATABASES = {
         'PORT': '5432',       # Default PostgreSQL port
     }
 }
-
+DATABASES['default']=dj_database_url.parse("postgresql://djangoapi_bpk7_user:5piru4uVRdXLKg9CYwCrp6lWEaAgq27l@dpg-cvhro30gph6c73cf05ng-a.oregon-postgres.render.com/djangoapi_bpk7")
+#postgresql://djangoapi_bpk7_user:5piru4uVRdXLKg9CYwCrp6lWEaAgq27l@dpg-cvhro30gph6c73cf05ng-a.oregon-postgres.render.com/djangoapi_bpk7
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'djangoapi_bpk7',  # Database name
+        'USER': 'djangoapi_bpk7_user',  # Username
+        'PASSWORD': '5piru4uVRdXLKg9CYwCrp6lWEaAgq27l',  # Password
+        'HOST': 'dpg-cvhro30gph6c73cf05ng-a.oregon-postgres.render.com',  # Host
+        'PORT': '5432',  # Default PostgreSQL port
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
