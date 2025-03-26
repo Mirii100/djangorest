@@ -1,6 +1,7 @@
 
 import dj_database_url
 from pathlib import Path
+import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,12 +11,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-izr5i)9jnnqksgr14fumsml$4v#9=+p6onq1(remykt62pe38+'
-
+SECRET_KEY = os.environ.get("SECRET_KEY")
+#'django-insecure-izr5i)9jnnqksgr14fumsml$4v#9=+p6onq1(remykt62pe38+'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG',False).lower()=='true'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
 
 
 # Application definition
@@ -82,7 +83,8 @@ DATABASES = {
         'PORT': '5432',       # Default PostgreSQL port
     }
 }
-DATABASES['default']=dj_database_url.parse("postgresql://djangoapi_bpk7_user:5piru4uVRdXLKg9CYwCrp6lWEaAgq27l@dpg-cvhro30gph6c73cf05ng-a.oregon-postgres.render.com/djangoapi_bpk7")
+database_url=os.environ.get('DATABASE_URL')
+DATABASES['default']=dj_database_url.parse(database_url)
 #postgresql://djangoapi_bpk7_user:5piru4uVRdXLKg9CYwCrp6lWEaAgq27l@dpg-cvhro30gph6c73cf05ng-a.oregon-postgres.render.com/djangoapi_bpk7
 DATABASES = {
     'default': {
