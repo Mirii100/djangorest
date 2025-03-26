@@ -66,25 +66,25 @@ WSGI_APPLICATION = 'apiProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'demoApi',
-        'USER': 'postgres',
-        'PASSWORD': 'alex',
-        'HOST': 'localhost',  # Or your DB server
-        'PORT': '5432',       # Default PostgreSQL port
-    }
-}
-database_url=os.environ.get('DATABASE_URL')
-DATABASES['default']=dj_database_url.parse(database_url)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'demoApi',
+#         'USER': 'postgres',
+#         'PASSWORD': 'alex',
+#         'HOST': 'localhost',  # Or your DB server
+#         'PORT': '5432',       # Default PostgreSQL port
+#     }
+# }
+DATABASE_URL=os.environ.get('DATABASE_URL')
+DATABASES['default']=dj_database_url.parse(DATABASE_URL)
 #postgresql://djangoapi_bpk7_user:5piru4uVRdXLKg9CYwCrp6lWEaAgq27l@dpg-cvhro30gph6c73cf05ng-a.oregon-postgres.render.com/djangoapi_bpk7
 DATABASES = {
     'default': {
@@ -96,6 +96,23 @@ DATABASES = {
         'PORT': '5432',  # Default PostgreSQL port
     }
 }
+
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'djangoapi_bpk7',
+            'USER': 'djangoapi_bpk7_user',
+            'PASSWORD': '5piru4uVRdXLKg9CYwCrp6lWEaAgq27l',
+            'HOST': 'dpg-cvhro30gph6c73cf05ng-a.oregon-postgres.render.com',
+            'PORT': '5432',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
